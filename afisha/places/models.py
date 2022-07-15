@@ -8,6 +8,6 @@ class Place(models.Model):
     lattitude = models.FloatField('Широта', null=True)
 
     def __str__(self):
-        return self.title
+        return f"{self.id}. {self.title}"
 
 # Create your models here.
