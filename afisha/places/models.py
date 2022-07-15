@@ -8,6 +8,12 @@ class Place(models.Model):
     lattitude = models.FloatField('Широта', null=True)
 
     def __str__(self):
-        return f"{self.id}. {self.title}"
+        return self.title
 
-# Create your models here.
+class Image(models.Model):
+    place = models.ForeignKey(Place, on_delete=models.CASCADE)
+    url = models.ImageField('Расположение картинки')
+    order_number = models.IntegerField('Порядковый номер')
+
+    def __str__(self):
+        return f"{self.order_number} {self.place.title}"
