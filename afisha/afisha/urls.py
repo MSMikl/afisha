@@ -18,10 +18,10 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path
 
-import afisha.views as views
+import places.views as views
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.show_index),
+    path('', views.index),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
