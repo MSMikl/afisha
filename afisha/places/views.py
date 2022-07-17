@@ -1,5 +1,6 @@
 from django.http.response import JsonResponse
 from django.shortcuts import render
+from django.urls import reverse
 
 from places.models import Place, Image
 
@@ -17,7 +18,7 @@ def index(request):
           "properties": {
             "title": place.title,
             "placeId": place.id,
-            "detailsUrl": "./static/places/moscow_legends.json"
+            "detailsUrl": reverse(viewname='place_json', args=[place.id])
           }
         }
         for place in Place.objects.all()
