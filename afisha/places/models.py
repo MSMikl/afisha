@@ -15,9 +15,19 @@ class Place(models.Model):
 
 
 class Image(models.Model):
+
     place = models.ForeignKey(Place, on_delete=models.CASCADE, related_name='images')
     url = models.ImageField('Картинка')
-    order_number = models.IntegerField('Порядковый номер')
+    order_number = models.IntegerField(
+        'Порядковый номер',
+        default=0,
+        blank=False,
+        null=False,
+        db_index=True
+    )
+
+    def get_last_number(self):
+        return self.objects.last().order_number
 
     def __str__(self):
         return f"{self.order_number} {self.place.title}"
@@ -25,3 +35,6 @@ class Image(models.Model):
     @property
     def absolute_image_url(self):
         return f"{settings.MEDIA_URL}{self.url}"
+
+    class Meta:
+        ordering = ['order_number']

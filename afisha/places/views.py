@@ -28,7 +28,7 @@ def index(request):
 
 
 def place(request, place_id):
-    place = Place.objects.get(id=place_id)
+    place = Place.objects.filter(id=place_id).select_related().last()
     data = {
         "title": place.title,
         "imgs": [str(image.absolute_image_url) for image in place.images.all()],
