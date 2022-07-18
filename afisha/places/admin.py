@@ -24,6 +24,11 @@ class ImageInline(SortableTabularInline):
 class ImageAdmin(SortableAdminMixin, admin.ModelAdmin):
     readonly_fields = ['get_preview']
 
+    def get_model_perms(self, request):
+        if not request.user.has_perm('can_see_image_model'):
+            return {}
+        return super(ImageAdmin, self).get_model_perms(request)
+
     def get_preview(self, obj):
         return html.format_html(
             '<img src="{}" height="{}"/>',
@@ -34,6 +39,9 @@ class ImageAdmin(SortableAdminMixin, admin.ModelAdmin):
 
 @admin.register(Place)
 class PlaceAdmin(SortableAdminBase, admin.ModelAdmin):
+    search_fields = [
+        'title'
+    ]
     inlines = [
         ImageInline
     ]

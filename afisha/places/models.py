@@ -14,6 +14,10 @@ class Place(models.Model):
     def __str__(self):
         return self.title
 
+    class Meta:
+        verbose_name = 'Локация'
+        verbose_name_plural = 'Локации'
+
 
 class Image(models.Model):
 
@@ -27,15 +31,18 @@ class Image(models.Model):
         db_index=True
     )
 
-    def get_last_number(self):
-        return self.objects.last().order_number
+    class Meta:
+        permissions = (
+            ('can_see_image_model', 'Видит строку Image')
+        )
+
 
     def __str__(self):
         return f"{self.order_number} {self.place.title}"
 
     @property
     def absolute_image_url(self):
-        return f"{settings.MEDIA_URL}{self.url}"
+        return f"/{settings.MEDIA_URL}{self.url}"
 
     class Meta:
         ordering = ['order_number']
