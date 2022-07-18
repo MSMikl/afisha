@@ -2,6 +2,7 @@ from django.db import models
 
 import afisha.settings as settings
 
+
 class Place(models.Model):
     title = models.CharField('Название', max_length=200, blank=False)
     description_short = models.TextField('Краткое описание', blank=True)
@@ -15,7 +16,7 @@ class Place(models.Model):
 
 class Image(models.Model):
     place = models.ForeignKey(Place, on_delete=models.CASCADE, related_name='images')
-    url = models.ImageField('Расположение картинки')
+    url = models.ImageField('Картинка')
     order_number = models.IntegerField('Порядковый номер')
 
     def __str__(self):
