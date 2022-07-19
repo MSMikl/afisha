@@ -21,7 +21,12 @@ class Place(models.Model):
 
 class Image(models.Model):
 
-    place = models.ForeignKey(Place, on_delete=models.CASCADE, related_name='images')
+    place = models.ForeignKey(
+        Place,
+        on_delete=models.CASCADE,
+        related_name='images',
+        verbose_name='Локация'
+    )
     file = models.ImageField('Картинка')
     order_number = models.IntegerField(
         'Порядковый номер',
@@ -32,9 +37,7 @@ class Image(models.Model):
     )
 
     class Meta:
-        permissions = (
-            ('can_see_image_model', 'Видит строку Image')
-        )
+        ordering = ['order_number']
 
 
     def __str__(self):
@@ -44,5 +47,3 @@ class Image(models.Model):
     def absolute_image_url(self):
         return f"/{settings.MEDIA_URL}{self.file}"
 
-    class Meta:
-        ordering = ['order_number']
