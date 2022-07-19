@@ -6,7 +6,7 @@ from places.models import Place
 
 
 def index(request):
-    data = {'data': {
+    places_data = {'data': {
       "type": "FeatureCollection",
       "features": [
         {
@@ -24,12 +24,13 @@ def index(request):
         for place in Place.objects.all()
       ]
     }}
-    return render(request, "index.html", context=data)
+    print()
+    return render(request, "index.html", context=places_data)
 
 
 def place(request, place_id):
     place = Place.objects.filter(id=place_id).select_related().last()
-    data = {
+    place_data = {
         "title": place.title,
         "imgs": [str(image.absolute_image_url) for image in place.images.all()],
         "description_short": place.description_short,
@@ -39,4 +40,4 @@ def place(request, place_id):
             "lat": str(place.latitude)
         }
     }
-    return JsonResponse(data=data, json_dumps_params={'ensure_ascii': False, 'indent': 2})
+    return JsonResponse(data=place_data, json_dumps_params={'ensure_ascii': False, 'indent': 2})
