@@ -14,9 +14,8 @@ class ImageInline(SortableTabularInline):
 
     def get_preview(self, obj):
         return html.format_html(
-            '<img src="{}" height="{}"/>',
-            obj.absolute_image_url,
-            obj.file.height if obj.file.height < 200 else 200
+            '<img src="{}" style="max-height: 200px">',
+            obj.absolute_image_url
         )
 
 
@@ -31,9 +30,8 @@ class ImageAdmin(SortableAdminMixin, admin.ModelAdmin):
 
     def get_preview(self, obj):
         return html.format_html(
-            '<img src="{}" height="{}"/>',
-            obj.absolute_image_url,
-            obj.file.height if obj.file.height < 200 else 200
+            '<img src="{}" style="max-height: 200px">',
+            obj.absolute_image_url
         )
 
 

@@ -2,11 +2,11 @@ from django.http.response import JsonResponse
 from django.shortcuts import render
 from django.urls import reverse
 
-from places.models import Place, Image
+from places.models import Place
 
 
 def index(request):
-    data = {'data' : {
+    data = {'data': {
       "type": "FeatureCollection",
       "features": [
         {
