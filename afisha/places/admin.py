@@ -8,7 +8,7 @@ from places.models import Place, Image
 
 class ImageInline(SortableTabularInline):
     model = Image
-    fields = ('url', 'get_preview', 'order_number')
+    fields = ('file', 'get_preview', 'order_number')
     readonly_fields = ['get_preview']
     extra = 1
 
@@ -16,7 +16,7 @@ class ImageInline(SortableTabularInline):
         return html.format_html(
             '<img src="{}" height="{}"/>',
             obj.absolute_image_url,
-            obj.url.height if obj.url.height < 200 else 200
+            obj.file.height if obj.file.height < 200 else 200
         )
 
 
@@ -33,7 +33,7 @@ class ImageAdmin(SortableAdminMixin, admin.ModelAdmin):
         return html.format_html(
             '<img src="{}" height="{}"/>',
             obj.absolute_image_url,
-            obj.url.height if obj.url.height < 200 else 200
+            obj.file.height if obj.file.height < 200 else 200
         )
 
 
