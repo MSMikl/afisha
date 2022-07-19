@@ -31,8 +31,6 @@ class Image(models.Model):
     order_number = models.IntegerField(
         'Порядковый номер',
         default=0,
-        blank=False,
-        null=False,
         db_index=True
     )
 
