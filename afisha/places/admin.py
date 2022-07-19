@@ -22,6 +22,7 @@ class ImageInline(SortableTabularInline):
 @admin.register(Image)
 class ImageAdmin(SortableAdminMixin, admin.ModelAdmin):
     readonly_fields = ['get_preview']
+    autocomplete_fields = ['place']
 
     def get_model_perms(self, request):
         if not request.user.has_perm('can_see_image_model'):
