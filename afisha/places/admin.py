@@ -26,7 +26,7 @@ class ImageAdmin(SortableAdminMixin, admin.ModelAdmin):
     def get_model_perms(self, request):
         if not request.user.has_perm('can_see_image_model'):
             return {}
-        return super(ImageAdmin, self).get_model_perms(request)
+        return super().get_model_perms(request)
 
     def get_preview(self, obj):
         return html.format_html(
