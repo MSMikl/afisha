@@ -72,7 +72,7 @@
       ]
     }
   </script> -->
-
+  {% verbatim %}
   <script id="app-template" type="text/template">
     <div v-bind:class="{'sidebar-content': 1, 'bg-white': selectedPlace, 'bg-secondary': !selectedPlace}">
       <div v-if="promptVisible" class="d-flex flex-column justify-content-center align-items-center" style="height: 100%;">
@@ -85,7 +85,6 @@
           <span class="sr-only">Loading...</span>
         </div>
       </div>
-
       <div class="place-description" v-if="selectedPlace">
 
         <img v-if="mainPhotoSrc" v-bind:src="mainPhotoSrc" class="d-block shadow mb-3 rounded" v-bind:alt="selectedPlace.title">
@@ -123,7 +122,7 @@
       </div>
     </div>
   </script>
-
+  {% endverbatim %}
 </head>
 <body>
   <div id="sidebar">

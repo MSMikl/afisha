@@ -24,12 +24,11 @@ def index(request):
         for place in Place.objects.all()
       ]
     }}
-    print()
     return render(request, "index.html", context=places_details)
 
 
 def show_place(request, place_id):
-    place = Place.objects.filter(id=place_id).select_related().last()
+    place = Place.objects.select_related().get(id=place_id)
     place_details = {
         "title": place.title,
         "imgs": [str(image.absolute_image_url) for image in place.images.all()],

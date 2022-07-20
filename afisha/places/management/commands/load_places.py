@@ -44,7 +44,7 @@ class Command(BaseCommand):
                     ), 'wb') as file:
                 file.write(response.content)
             Image.objects.get_or_create(
-                url=os.path.basename(image_url),
+                file=os.path.basename(image_url),
                 defaults={
                     'place': place,
                     'order_number': number
